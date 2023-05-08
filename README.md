@@ -1,5 +1,7 @@
 # logzio-jumpcloud
-Ship Jumpcloud logs to Logz.io every time interval, data from jumpcloud api in the configuration and sends it to Logz.io.
+Ship Jumpcloud logs to Logz.io. 
+
+Every time interval, events exported from Jumpcloud API is in the configuration and sends it to Logz.io.
 
 
 ## Getting Started
