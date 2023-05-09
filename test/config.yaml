@@ -1,0 +1,10 @@
+logzio:
+ url: "https://listener.logz.io:8071"
+ token: "Logzio_Token"
+jumpcloud_api:
+   url: https://api.jumpcloud.com/insights/directory/v1/events
+   start_date:
+   credentials:
+     token: "jumpcloud_api_token"
+   settings:
+     time_interval:
