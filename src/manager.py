@@ -53,7 +53,7 @@ class Manager:
         Reads configuration information from a YAML file.
         """
         with open(self.config_file) as f:
-            data = yaml.load(f, Loader=yaml.FullLoader)
+            data = yaml.safe_load(f)
 
         self.logzio_url = data['logzio']['url']
         self.logzio_token = data['logzio']['token']
