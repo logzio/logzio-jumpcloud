@@ -47,7 +47,7 @@ jumpcloud_api:
    url: https://api.jumpcloud.com/insights/directory/v1/events
    start_date:
    credentials:
-     token: "jumpcloud_api_token"
+     token: "<<JUMPCLOUD_API_TOKEN>>"
    settings:
      time_interval:
 ```
