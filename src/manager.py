@@ -57,7 +57,7 @@ class Manager:
 
         self.logzio_url = data['logzio']['url']
         self.logzio_token = data['logzio']['token']
-        self.jumpcloud_url = data['jumpcloud_api']['url']
+        self.jumpcloud_url = "https://api.jumpcloud.com/insights/directory/v1/events"
         if not self.is_valid_url(self.jumpcloud_url):
             logger.error("Please enter valid url for jumpcloud API")
         self.last_time_event = data['jumpcloud_api']['start_date']
