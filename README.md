@@ -32,10 +32,10 @@ Create and edit the configuration file and name it `config.yaml`. There are 2 se
 | --- | --- | --- | --- |
 | jumpcloud_api | A dictionary containing the JumpCloud API configurations. | Required | - |
 | url | The URL for the JumpCloud Insights Directory API endpoint. https://api.jumpcloud.com/insights/directory/v1/events. | Required | - |
-| start_date | The start date and time for querying the JumpCloud API in UTC time with the format of %Y-%m-%dT%H:%M:%S.%fZ. For example: 2023-05-04T12:30:00.000000Z. | Optional | The current date and time. Equals to nothing as Default |
+| start_date | The start date and time for querying the JumpCloud API in UTC time with the format of %Y-%m-%dT%H:%M:%S.%fZ. For example: 2023-05-04T12:30:00.000000Z. | Optional | The current date and time. |
 | credentials | A dictionary containing the token for authenticating the JumpCloud API request. | Required | - |
 | token | The JumpCloud API token. | Required | - |
-| time_interval | The time interval for querying the JumpCloud API in minutes. | Optional | Equals to nothing as Default 5m |
+| time_interval | The time interval for querying the JumpCloud API in minutes. | Optional |5m |
 
 **`Config.yaml`**
 ```yaml
