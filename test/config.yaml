@@ -1,9 +1,9 @@
 logzio:
  url: "https://listener.logz.io:8071"
- token: "<<LOGZIO_TOKEN>>"
+ token: "<<Logzio_Token>>"
 jumpcloud_api:
-   start_date:
+  start_date:
    credentials:
-     token: "<<JUMPCLOUD_API_TOKEN>>"
+     token: "<<jumpcloud_api_token>>"
    settings:
      time_interval:
