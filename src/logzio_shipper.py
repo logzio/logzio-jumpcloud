@@ -115,9 +115,6 @@ class LogzioShipper:
             logger.error("Something went wrong. response: {}".format(e))
             raise
 
-    def add_custom_field_to_list(self, custom_field: ApiCustomField) -> None:
-        self._custom_fields[custom_field.key] = custom_field.value
-
     def _is_log_valid_to_be_sent(self, log: str, log_size: int) -> bool:
         if log_size > LogzioShipper.MAX_LOG_SIZE_BYTES:
             logger.error(
