@@ -4,7 +4,7 @@ import signal
 from logzio_shipper import *
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
-
+import urllib
 
 
 
@@ -145,6 +145,7 @@ class Manager:
         self.jumpcloud_time_interval = data['jumpcloud_api']['settings']['time_interval']
         if self.jumpcloud_time_interval is None or 'time_interval' not in data['jumpcloud_api']['settings']:
             self.jumpcloud_time_interval = 5
+        self.logzio_shipper = LogzioShipper(self.logzio_url, self.logzio_token)
         return True
 
 
@@ -160,7 +161,6 @@ class Manager:
 
         :param events: The list of events to send to Logz.io.
         """
-        self.logzio_shipper = LogzioShipper(self.logzio_url, self.logzio_token)
         try:
             if len(events) != 0:
                 logger.info("Events number: {}".format(len(events)))
@@ -176,10 +176,20 @@ class Manager:
                 self.last_time_event = events[-1]['timestamp']
             else:
                 logger.info("No events")
-            self.last_time_event = self.last_time_plus_sec(self.last_time_event)
-            self.write_last_time_to_file(self.last_time_event)
         except Exception as e:
            raise self.logzio_error("Failed to send data to Logz.io... {}".format(e))
+        except requests.HTTPError as e:
+            status_code = e.response.status_code
+
+            if status_code == 400:
+                raise self.logzio_error("The logs are bad formatted. response: {}".format(e))
+
+            if status_code == 401:
+                raise self.logzio_error("The token is missing or not valid. Make sure you’re using the right account token.")
+
+            raise self.logzio_error("Somthing went wrong. response: {}".format(e))
+
+
     class jumpcloud_api_error(Exception):
         pass
 
@@ -220,6 +230,8 @@ class Manager:
                 events = self.request_events_jumpcloud()
                 self.send_events_to_logzio(events)
             except self.jumpcloud_api_error as e:
+                logger.error(e)
+            except self.logzio_error as e:
                 logger.error(e)
             logger.debug("Going to sleep for {}m".format(self.jumpcloud_time_interval))
             time.sleep(self.jumpcloud_time_interval * 60)
