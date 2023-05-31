@@ -38,12 +38,11 @@ Create and edit the configuration file and name it `config.yaml`. There are 2 se
 
 **`Config.yaml`**
 ```yaml
+
 logzio:
  url: "https://listener.logz.io:8071"
  token: "<<LOGZIO_TOKEN>>"
-
 jumpcloud_api:
-   url: https://api.jumpcloud.com/insights/directory/v1/events
    start_date:
    credentials:
      token: "<<JUMPCLOUD_API_TOKEN>>"
