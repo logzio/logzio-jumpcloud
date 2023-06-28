@@ -155,6 +155,7 @@ class Manager:
 
     class logzio_error(Exception):
         pass
+    
     def send_events_to_logzio(self, events) -> None:
         """
         Sends a list of events to Logz.io.
@@ -176,8 +177,6 @@ class Manager:
                 self.last_time_event = events[-1]['timestamp']
             else:
                 logger.info("No events")
-        except Exception as e:
-           raise self.logzio_error("Failed to send data to Logz.io... {}".format(e))
         except requests.HTTPError as e:
             status_code = e.response.status_code
 
@@ -188,7 +187,8 @@ class Manager:
                 raise self.logzio_error("The token is missing or not valid. Make sure you’re using the right account token.")
 
             raise self.logzio_error("Somthing went wrong. response: {}".format(e))
-
+        except Exception as e:
+           raise self.logzio_error("Failed to send data to Logz.io... {}".format(e))
 
     class jumpcloud_api_error(Exception):
         pass
@@ -219,9 +219,10 @@ class Manager:
             raise self.jumpcloud_api_error(f"Timeout Error: {errt}")
         except requests.exceptions.RequestException as err:
             raise self.jumpcloud_api_error(f"Something went wrong: {err}")
+        except Exception as e:
+           raise self.jumpcloud_api_error(f"Something went wrong: {err}")
 
     def run(self):
-
         signal.signal(signal.SIGINT, self.handle_sigint)
         if not self.read_config():
             return
