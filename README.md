@@ -71,5 +71,8 @@ You can find the `lastTime.txt` file inside the mounted host directory that you 
 Note that the last start date should also be in UTC time with the format of %Y-%m-%dT%H:%M:%S.%fZ.
 
 
+### Changelog
+
+- **0.0.1**: Initial release.
 
 
