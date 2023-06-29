@@ -7,16 +7,16 @@ Collects Jumpcloud events every time interval, using the Jumpcloud API given in 
 ## Getting Started
 ### Pull Docker Image
 
-Download the `logzio/logzio-jumpcloud-shipper` image:
+Download the `logzio/logzio-jumpcloud` image:
 ```
-docker pull logzio/logzio-jumpcloud-shipper
+docker pull logzio/logzio-jumpcloud
 ```
 ### Mount a Host Directory as a Data Volume
 
 Create a local directory and move into it:
 ```shell
-mkdir logzio-jumpcloud-shipper
-cd logzio-jumpcloud-shipper
+mkdir logzio-jumpcloud
+cd logzio-jumpcloud
 ```
 ### Configuration
 Create and edit the configuration file and name it `config.yaml`. There are 2 sections of the configuration:
@@ -53,12 +53,12 @@ jumpcloud_api:
 
 ### Run The Docker Container
 ```shell
-docker run --name logzio-jumpcloud-shipper -v "$(pwd)":/app/src/shared logzio-jumpcloud-shipper
+docker run --name logzio-jumpcloud -v "$(pwd)":/app/src/shared logzio-jumpcloud
 ```
 ### Stop Docker Container
 When you stop the container, the code will run until completion of the iteration. To make sure it will finish the iteration on time, please give it a grace period of 30 seconds when you run the docker stop command:
 ```shell
-docker stop -t 30 logzio-jumpcloud-shipper
+docker stop -t 30 logzio-jumpcloud
 ```
 
 ### Last Start Dates Text File
