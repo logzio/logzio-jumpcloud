@@ -19,7 +19,7 @@ mkdir logzio-jumpcloud
 cd logzio-jumpcloud
 ```
 ### Configuration
-Create and edit the configuration file and name it `config.yaml`. There are 2 sections of the configuration:
+Create and edit the configuration file and name it `config.yaml` in the `logzio-jumpcloud` folder that was created earlier. There are 2 sections of the configuration:
 
 **logzio**
 | Parameter Name | Description | Required/Optional | Default |
@@ -53,12 +53,12 @@ jumpcloud_api:
 
 ### Run The Docker Container
 ```shell
-docker run --name logzio-jumpcloud -v "$(pwd)":/app/src/shared logzio-jumpcloud
+docker run --name logzio-jumpcloud -v "$(pwd)":/app/src/shared logzio/logzio-jumpcloud
 ```
 ### Stop Docker Container
 When you stop the container, the code will run until completion of the iteration. To make sure it will finish the iteration on time, please give it a grace period of 30 seconds when you run the docker stop command:
 ```shell
-docker stop -t 30 logzio-jumpcloud
+docker stop -t 30 logzio/logzio-jumpcloud
 ```
 
 ### Last Start Dates Text File
