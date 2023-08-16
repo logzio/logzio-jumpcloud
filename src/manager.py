@@ -5,7 +5,7 @@ from logzio_shipper import *
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
 import urllib
-
+import os
 
 
 logger = logging.getLogger(__name__)
@@ -66,14 +66,13 @@ class Manager:
                 if data['logzio'] is None:
                     logger.error("The 'logzio' dictionary is None.")
                     return False
-                elif 'url' not in data['logzio'] or 'token' not in data['logzio']:
+                elif 'url' not in data['logzio'] or 'token' not in data['logzio'] and "LOGZIO_API_TOKEN" not in os.environ: # check the configuration or the environment variable
                     logger.error("Either 'url' or 'token' is missing from the 'logzio' dictionary.")
                     return False
 
             else:
                 logger.error("The key 'logzio' does not exist in the data dictionary.")
                 return False
-
             if 'jumpcloud_api' in data:
                 if data['jumpcloud_api'] is None:
                     logger.error("The 'jumpcloud_api' dictionary is None.")
@@ -82,7 +81,7 @@ class Manager:
                     if data['jumpcloud_api']['credentials'] is None:
                         logger.error("The 'credentials' dictionary in 'jumpcloud_api' is None.")
                         return False
-                    elif 'token' not in data['jumpcloud_api']['credentials']:
+                    elif 'token' not in data['jumpcloud_api']['credentials'] and "JUMPCLOUD_API_TOKEN" not in os.environ: # check the configuration or the environment variable
                         logger.error("The key 'token' is missing from the 'credentials' dictionary.")
                         return False
                 else:
@@ -128,14 +127,14 @@ class Manager:
             return False
 
         self.logzio_url = data['logzio']['url']
-        self.logzio_token = data['logzio']['token']
+        self.logzio_token = os.getenv("LOGZIO_API_TOKEN") if "LOGZIO_API_TOKEN" in os.environ else data['logzio']['token']
         self.jumpcloud_url = "https://api.jumpcloud.com/insights/directory/v1/events"
         self.last_time_event = data['jumpcloud_api']['start_date']
         if self.last_time_event is None or 'start_date' in data['jumpcloud_api']:
             self.last_time_event = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
         elif self.is_valid_format(str(self.last_time_event)):
             self.last_time_event = data['jumpcloud_api']['start_date']
-        self.jumpcloud_token = data['jumpcloud_api']['credentials']['token']
+        self.jumpcloud_token = os.getenv("JUMPCLOUD_API_TOKEN") if "JUMPCLOUD_API_TOKEN" in os.environ else data['jumpcloud_api']['credentials']['token']
         self.headers = {
             "accept": "application/json",
             "x-api-key": self.jumpcloud_token,
