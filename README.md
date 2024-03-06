@@ -22,19 +22,21 @@ cd logzio-jumpcloud
 Create and edit the configuration file and name it `config.yaml` in the `logzio-jumpcloud` folder that was created earlier. There are 2 sections of the configuration:
 
 **logzio**
-| Parameter Name | Description | Required/Optional | Default |
-| --- | --- | --- | --- |
-| url | The Logz.io Listener URL for your region with port 8071. https://listener.logz.io:8071 | Required | - |
-| token | Your Logz.io log shipping token securely directs the data to your Logz.io account. | Optional (see  [Environment variables](###use-environment-variable)) | - |
+
+| Parameter Name | Description | Required/Optional                                                                  | Default |
+| --- | --- |------------------------------------------------------------------------------------| --- |
+| url | The Logz.io Listener URL for your region with port 8071. https://listener.logz.io:8071 | Required                                                                           | - |
+| token | Your Logz.io log shipping token securely directs the data to your Logz.io account. | Required (also avilable via  [Environment variables](###use-environment-variable)) | - |
 
 **Jumpcloud**
-| Parameter Name | Description | Required/Optional | Default |
-| --- | --- | --- | --- |
-| jumpcloud_api | A dictionary containing the JumpCloud API configurations. | Required | - |
-| start_date | The start date and time for querying the JumpCloud API in UTC time with the format of %Y-%m-%dT%H:%M:%S.%fZ. For example: 2023-05-04T12:30:00.000000Z. | Optional | The current date and time. |
-| credentials | A dictionary containing the token for authenticating the JumpCloud API request. | (see  [Environment variables](###use-environment-variable)) | - |
-| token | The JumpCloud API token. | Required | - |
-| time_interval | The time interval for querying the JumpCloud API in minutes. | Optional |5m |
+
+| Parameter Name | Description | Required/Optional                                                    | Default |
+| --- | --- |----------------------------------------------------------------------| --- |
+| jumpcloud_api | A dictionary containing the JumpCloud API configurations. | Required                                                             | - |
+| start_date | The start date and time for querying the JumpCloud API in UTC time with the format of %Y-%m-%dT%H:%M:%S.%fZ. For example: 2023-05-04T12:30:00.000000Z. | Optional                                                             | The current date and time. |
+| credentials | A dictionary containing the token for authenticating the JumpCloud API request. | Required (also avilable via  [Environment variables](###use-environment-variable)) | - |
+| token | The JumpCloud API token. | Required                                                             | - |
+| time_interval | The time interval for querying the JumpCloud API in minutes. | Optional                                                             |5m |
 
 **`Config.yaml`**
 ```yaml
@@ -78,7 +80,10 @@ Note that the last start date should also be in UTC time with the format of %Y-%
 
 
 ### Changelog
-
+- **0.0.2**:
+  - Use event timestamp instead of ingested one @jmi926
+  - Allow usage of `LOGZIO_API_TOKEN` and `JUMPCLOUD_API_TOKEN` ENV variables instead of file configuration @jmi926
+  - Dockerfile - allow the user to be other than root @jmi926
 - **0.0.1**: Initial release.
 
 
