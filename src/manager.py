@@ -165,6 +165,7 @@ class Manager:
             if len(events) != 0:
                 logger.info("Events number: {}".format(len(events)))
                 for event in events:
+                    event["@timestamp"] = event["timestamp"]
                     if "changes" in event:
                         event["changes"] = self.changesValueToJSON(event["changes"])
                         event_str = json.dumps(event)
