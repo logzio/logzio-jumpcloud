@@ -71,7 +71,7 @@ class LogzioShipper:
         try:
             headers = {"Content-Type": "application/json",
                        "Content-Encoding": "gzip",
-                       "Logzio-Shipper": "logzio-jumpcloud/v{0}/0/0.".format(VERSION)}
+                       "user-agent": "logzio-jumpcloud/v{0}/0/0.".format(VERSION)}
             compressed_data = gzip.compress(str.encode('\n'.join(self._logs)))
             response = self._get_request_retry_session().post(url=self._logzio_url,
                                                               data=compressed_data,
