@@ -81,7 +81,7 @@ Note that the last start date should also be in UTC time with the format of %Y-%
 
 
 ### Changelog
--**0.0.3**:
+- **0.0.3**:
   - Added support for `org_id` header in JumpCloud API requests to specify an administered organization.
   - Improved error handling for missing or invalid time_interval values.
 - **0.0.2**:
