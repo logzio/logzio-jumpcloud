@@ -36,6 +36,7 @@ Create and edit the configuration file and name it `config.yaml` in the `logzio-
 | start_date | The start date and time for querying the JumpCloud API in UTC time with the format of %Y-%m-%dT%H:%M:%S.%fZ. For example: 2023-05-04T12:30:00.000000Z. | Optional                                                             | The current date and time. |
 | credentials | A dictionary containing the token for authenticating the JumpCloud API request. | Required (also avilable via  [Environment variables](###use-environment-variable)) | - |
 | token | The JumpCloud API token. | Required                                                             | - |
+| org_id | TThe organization ID for administered JumpCloud organizations. Needed for querying events if managing multiple organizations.	 | Optional                                                             | - |
 | time_interval | The time interval for querying the JumpCloud API in minutes. | Optional                                                             |5m |
 
 **`Config.yaml`**
@@ -80,6 +81,9 @@ Note that the last start date should also be in UTC time with the format of %Y-%
 
 
 ### Changelog
+-**0.0.3**:
+  - Added support for `org_id` header in JumpCloud API requests to specify an administered organization.
+  - Improved error handling for missing or invalid time_interval values.
 - **0.0.2**:
   - Use event timestamp instead of ingested one @jmi926
   - Allow usage of `LOGZIO_API_TOKEN` and `JUMPCLOUD_API_TOKEN` ENV variables instead of file configuration @jmi926
